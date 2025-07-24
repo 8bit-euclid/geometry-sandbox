@@ -1,0 +1,15 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "main",
+    srcs = ["main.cpp"],
+    deps = [
+        "//lib/geometry:geometry",
+        "//lib/math_utils:math_utils",
+    ],
+    copts = [
+        "-std=c++23",
+        "-Wall",
+        "-Wextra",
+    ],
+)
