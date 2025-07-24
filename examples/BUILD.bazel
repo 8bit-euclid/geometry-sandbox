@@ -1,0 +1,9 @@
+cc_binary(
+    name = "cpp23_demo",
+    srcs = ["cpp23_demo.cpp"],
+    copts = [
+        "-std=c++23",
+        "-Wall",
+        "-Wextra",
+    ],
+)

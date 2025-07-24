@@ -36,40 +36,24 @@ is_post_creation() {
     [[ "${DEVCONTAINER:-}" == "1" ]] && [[ -n "${VSCODE_INJECTION:-}" ]]
 }
 
-# Docker utilities
-wait_for_docker() {
-    # Increase timeout for post-creation scenarios where Docker-in-Docker takes longer to start
-    local max_attempts=60
-    print_section "Waiting for Docker daemon to be ready..."
+# Build utilities
+test_cpp23_support() {
+    local compiler="$1"
+    if command_exists "$compiler"; then
+        # Create a simple C++23 test
+        local test_file="/tmp/cpp23_test_$$.cpp"
+        echo '#include <version>' > "$test_file"
+        echo 'int main() { return 0; }' >> "$test_file"
 
-    for i in $(seq 1 $max_attempts); do
-        if docker info &>/dev/null; then
-            log_success "Docker is working correctly"
+        if "$compiler" -std=c++23 -c "$test_file" -o /tmp/cpp23_test_$$.o 2>/dev/null; then
+            rm -f "$test_file" /tmp/cpp23_test_$$.o
             return 0
         else
-            if [ $i -eq $max_attempts ]; then
-                if is_devcontainer; then
-                    log_warning "Docker daemon not accessible after $max_attempts seconds in devcontainer"
-                else
-                    log_warning "Docker daemon not accessible after $max_attempts seconds, continuing anyway..."
-                fi
-                return 1
-            else
-                # Show progress less frequently to reduce noise
-                if [ $((i % 5)) -eq 0 ] || [ $i -le 5 ]; then
-                    print_section "Waiting for Docker daemon... (attempt $i/$max_attempts)"
-                fi
-                sleep 1
-            fi
+            rm -f "$test_file"
+            return 1
         fi
-    done
-}
-
-# Cleanup function for Docker images
-cleanup_docker_image() {
-    local image_name="$1"
-    if docker images -q "$image_name" &>/dev/null; then
-        docker rmi "$image_name" &>/dev/null || true
+    else
+        return 1
     fi
 }
 

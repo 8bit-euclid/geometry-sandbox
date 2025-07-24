@@ -1,0 +1,24 @@
+# Enable Bzlmod (MODULE.bazel system)
+common --enable_bzlmod
+
+# C++23 configuration
+build --cxxopt=-std=c++23
+build --host_cxxopt=-std=c++23
+
+# Optimization flags
+build --copt=-O2
+build --copt=-DNDEBUG
+
+# Debug configuration
+build:debug --copt=-g
+build:debug --copt=-O0
+build:debug --strip=never
+
+# Compiler-specific flags
+build --cxxopt=-Wall
+build --cxxopt=-Wextra
+build --cxxopt=-Wpedantic
+
+# Modern C++ features
+build --cxxopt=-fcoroutines
+build --cxxopt=-fmodules-ts

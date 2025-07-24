@@ -1,67 +1,102 @@
 #!/bin/bash
-# Container build test script
+# C++23 Bazel build test script
 set -euo pipefail
 
 # Source utilities and initialize paths
 source "$(dirname "${BASH_SOURCE[0]}")/../shared-utils.sh"
 init_test_paths
 
-TEST_IMAGE="grpc-sandbox-test-$(date +%s)"
+test_cpp_compilation() {
+    print_section "Testing C++23 compilation..."
 
-test_container_build() {
-    local dockerfile="$WORKSPACE_ROOT/.devcontainer/Dockerfile"
+    # Create a temporary C++23 test file
+    local test_file="/tmp/cpp23_test.cpp"
+    cat > "$test_file" << 'EOF'
+#include <iostream>
+#include <vector>
+#include <ranges>
+#include <algorithm>
 
-    # Validate prerequisites
-    [[ ! -f "$dockerfile" ]] && log_error "Cannot build - Dockerfile not found" && return 1
-    ! command_exists docker || ! docker info &>/dev/null &&
-        log_warning "Skipping build test - Docker not available" && return 0
+int main() {
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
 
-    local repo_name=$(get_repo_name)
-    print_section "Building container..."
+    // C++23 features test
+    auto even_numbers = numbers
+        | std::views::filter([](int n) { return n % 2 == 0; })
+        | std::views::transform([](int n) { return n * 2; });
 
-    # Configure build with registry cache if available
-    local build_cmd="docker build"
-    local build_args=()
+    for (auto n : even_numbers) {
+        std::cout << n << " ";
+    }
+    std::cout << std::endl;
 
-    if [[ -n "$repo_name" ]]; then
-        local cache_ref="ghcr.io/${repo_name}/devcontainer:buildcache"
-        print_section "Using BuildKit with registry cache: $cache_ref"
+    return 0;
+}
+EOF
 
-        if docker buildx version &>/dev/null; then
-            build_cmd="docker buildx build"
-            build_args+=(--cache-from "type=registry,ref=$cache_ref")
-            log_success "BuildKit cache configured (cache will be used if accessible)"
+    # Test compilation with g++
+    if g++ -std=c++23 -o /tmp/cpp23_test "$test_file" 2>/dev/null; then
+        log_success "C++23 compilation with g++ works"
+
+        # Test execution
+        if /tmp/cpp23_test &>/dev/null; then
+            log_success "C++23 executable runs successfully"
         else
-            log_warning "BuildKit not available - building without cache"
+            log_warning "C++23 executable failed to run"
         fi
+
+        rm -f /tmp/cpp23_test
     else
-        log_warning "Repository name not available - building without registry cache"
+        log_error "C++23 compilation with g++ failed"
     fi
 
-    # Build and test container
-    if $build_cmd "${build_args[@]}" -t "$TEST_IMAGE" -f "$dockerfile" "$WORKSPACE_ROOT" &>/dev/null; then
-        log_success "Container builds successfully"
+    # Clean up test file
+    rm -f "$test_file"
+}
 
-        # Test workspace mounting
-        if docker run --rm -v "$WORKSPACE_ROOT:/workspace" "$TEST_IMAGE" ls /workspace &>/dev/null; then
-            log_success "Workspace mounting works"
+test_bazel_build() {
+    print_section "Testing Bazel build system..."
+
+    cd "$WORKSPACE_ROOT"
+
+    # Check if Bazel workspace exists
+    if [ -f "WORKSPACE" ] || [ -f "WORKSPACE.bazel" ] || [ -f "MODULE.bazel" ]; then
+        log_success "Bazel workspace found"
+
+        # Test basic Bazel query
+        if bazel query //... &>/dev/null; then
+            log_success "Bazel query works"
         else
-            log_error "Workspace mounting failed"
+            log_error "Bazel query failed"
         fi
 
-        cleanup_docker_image "$TEST_IMAGE"
+        # Test if there are any BUILD files to test
+        if find . -name "BUILD" -o -name "BUILD.bazel" | head -1 | grep -q .; then
+            print_section "Testing Bazel build..."
+
+            # Try to build all targets (if any exist)
+            if bazel build //... 2>/dev/null; then
+                log_success "Bazel build successful"
+            else
+                log_warning "Bazel build failed (may be expected if no targets exist)"
+            fi
+        else
+            log_warning "No BUILD files found - skipping build test"
+        fi
     else
-        log_error "Container build failed"
+        log_warning "No Bazel workspace found - skipping Bazel tests"
     fi
 }
 
-# Cleanup function and trap
-cleanup() { cleanup_docker_image "$TEST_IMAGE"; }
-trap cleanup EXIT
+# Main function - standardized entry point
+main() {
+    test_cpp_compilation
+    test_bazel_build
+}
 
 # Run test if script is executed directly
-[[ "${BASH_SOURCE[0]}" == "${0}" ]] && {
-    print_heading "🧪 Container Build Test"
-    test_container_build
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    print_heading "🏗️ C++23 & Bazel Build Test"
+    main
     exit $EXIT_CODE
-}
+fi

@@ -15,28 +15,28 @@ RUN usermod -l vscode ubuntu \
 RUN chown -R vscode:vscode /workspace \
     && chmod -R 755 /workspace
 
-# Install essential packages
+# Install essential packages for C++23 development
 RUN apt-get update && apt-get install -y \
     # Basic tools
     sudo \
     curl \
     wget \
-    make \
-    build-essential \
     git \
-    # Python
-    python3 \
-    python3-pip \
+    # C++ development tools
+    build-essential \
+    gcc-13 \
+    g++-13 \
+    clang-18 \
+    libc++-18-dev \
+    libc++abi-18-dev \
+    # Additional development tools
+    gdb \
+    valgrind \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Go
-RUN wget -O go.tar.gz https://go.dev/dl/go1.24.4.linux-amd64.tar.gz \
-    && tar -C /usr/local -xzf go.tar.gz \
-    && rm go.tar.gz
-
-# Install buf
-RUN wget -O /usr/local/bin/buf https://github.com/bufbuild/buf/releases/download/v1.55.1/buf-Linux-x86_64 \
-    && chmod +x /usr/local/bin/buf
+# Set GCC-13 as default (supports C++23)
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
 
 # Install Bazelisk as the Bazel binary (wrapper and version manager for Bazel)
 RUN wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.26.0/bazelisk-linux-amd64 \
@@ -46,19 +46,10 @@ RUN wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases
 RUN wget -O /usr/local/bin/buildifier https://github.com/bazelbuild/buildtools/releases/latest/download/buildifier-linux-amd64 \
     && chmod +x /usr/local/bin/buildifier
 
-# Set up environment
-ENV PATH="/usr/local/go/bin:${PATH}"
-ENV GOPATH="/home/vscode/go"
-ENV PATH="${GOPATH}/bin:${PATH}"
-
-# Add vscode user to sudo group - must be done as root
-# Docker group will be handled by the docker-in-docker feature
+# Add vscode user to sudo group
 RUN usermod -aG sudo vscode \
     && echo 'vscode ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Switch to vscode user
 USER vscode
 WORKDIR /workspace
-
-# Install basic Python packages (using break-system-packages for Ubuntu 24.04)
-RUN python3 -m pip install --user --break-system-packages grpcio protobuf
