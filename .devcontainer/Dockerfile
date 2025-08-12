@@ -46,6 +46,13 @@ RUN wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases
 RUN wget -O /usr/local/bin/buildifier https://github.com/bazelbuild/buildtools/releases/latest/download/buildifier-linux-amd64 \
     && chmod +x /usr/local/bin/buildifier
 
+# Download and install Eigen 3.4.0 header files
+RUN wget -O /tmp/eigen-3.4.0.tar.gz https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz \
+    && cd /tmp \
+    && tar -xzf eigen-3.4.0.tar.gz \
+    && cp -r eigen-3.4.0/Eigen /usr/local/include/ \
+    && rm -rf /tmp/eigen-3.4.0*
+
 # Add vscode user to sudo group
 RUN usermod -aG sudo vscode \
     && echo 'vscode ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers

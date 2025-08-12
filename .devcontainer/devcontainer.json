@@ -1,14 +1,18 @@
 {
-    "name": "C++23 Bazel Development Container",
+    "name": "Geometry DevContainer",
     "build": {
         "dockerfile": "Dockerfile"
     },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/workspace",
+    "postCreateCommand": "bash /workspace/.devcontainer/scripts/post-create.sh",
+    "remoteUser": "vscode",
+
     "customizations": {
         "vscode": {
             "extensions": [
                 "ms-vscode.cpptools",
-                "bazelbuild.vscode-bazel",
-                "augment.vscode-augment"
+                "bazelbuild.vscode-bazel"
             ],
             "settings": {
                 "C_Cpp.default.cppStandard": "c++23",
@@ -18,7 +22,5 @@
                 "bazel.buildifierExecutable": "/usr/local/bin/buildifier"
             }
         }
-    },
-    "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
-    "remoteUser": "vscode"
+    }
 }
