@@ -3,6 +3,10 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
+    "runArgs": [
+        "--name", "vsc-geometry-sandbox",
+        "--privileged"
+    ],
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
     "workspaceFolder": "/workspace",
     "postCreateCommand": "bash /workspace/.devcontainer/scripts/post-create.sh",
