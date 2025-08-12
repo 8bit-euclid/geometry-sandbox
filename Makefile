@@ -1,6 +1,3 @@
-# Makefile for Geometry Sandbox
-# This Makefile provides convenient targets that wrap Bazel commands
-
 .PHONY: build run clean
 
 # Default target
@@ -14,7 +11,7 @@ build:
 # Run the main application
 run: build
 	@echo "Running main application..."
-	bazel run //:main
+	bazel run //src:main
 
 # Clean build artifacts
 clean:

@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+eigen",
+                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+libigl/include"
+            ],
+            "cppStandard": "c++23"
+        }
+    ],
+    "version": 4
+}
