@@ -138,10 +138,10 @@
   },
   "selectedYankedVersions": {},
   "moduleExtensions": {
-    "//external/bazel:extensions.bzl%non_module_deps": {
+    "//third_party/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "00y5H0Mlc2Z/ePWG2D6Kglxvzgdw4ZDWMct4xgS0umw=",
-        "usagesDigest": "pTqPeF+cuQNAc753pD6beRCEO9YG71TvpcXvpb938O4=",
+        "bzlTransitiveDigest": "d1OOwHt45nDA3Ek5JnVBmqhhJ98+0TF+EZq+Dr8I9qk=",
+        "usagesDigest": "By3jf7HFkiIdZPsfYTGTxRqxk9qTioij34ZbcLIQLIE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -150,14 +150,14 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
             "attributes": {
               "remote": "https://github.com/AcademySoftwareFoundation/openvdb.git",
-              "build_file": "@@//external/bazel:openvdb.BUILD",
+              "build_file": "@@//third_party/bazel:openvdb.BUILD",
               "tag": "v11.0.0"
             }
           },
           "eigen": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file": "@@//external/bazel:eigen.BUILD",
+              "build_file": "@@//third_party/bazel:eigen.BUILD",
               "strip_prefix": "eigen-3.4.0",
               "urls": [
                 "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz"
@@ -168,7 +168,7 @@
           "triangle": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file": "@@//external/bazel:triangle.BUILD",
+              "build_file": "@@//third_party/bazel:triangle.BUILD",
               "strip_prefix": "triangle-master",
               "urls": [
                 "https://github.com/libigl/triangle/archive/refs/heads/master.zip"
@@ -179,9 +179,40 @@
           "libigl": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
             "attributes": {
-              "build_file": "@@//external/bazel:libigl.BUILD",
+              "build_file": "@@//third_party/bazel:libigl.BUILD",
               "remote": "https://github.com/libigl/libigl.git",
               "commit": "40e7900ccbd767f1f360e0eb10f0f1a6432e0993"
+            }
+          },
+          "boost": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
+            "attributes": {
+              "build_file": "@@//third_party/bazel:boost.BUILD",
+              "strip_prefix": "boost_1_86_0",
+              "urls": [
+                "https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz"
+              ],
+              "integrity": "sha256-JXXnT/w+8c0Lq6wsHui9tXgqDuZysZEtpA5bS1kcoB8="
+            }
+          },
+          "cgal": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
+            "attributes": {
+              "build_file": "@@//third_party/bazel:cgal.BUILD",
+              "strip_prefix": "cgal-6.0.1",
+              "urls": [
+                "https://github.com/CGAL/cgal/archive/refs/tags/v6.0.1.tar.gz"
+              ],
+              "integrity": "sha256-F+6GdQuYsO/vNWtw8b7WtUGzVzvSkR9A/UAzjTVFJvU="
+            }
+          },
+          "hedron_compile_commands": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
+            "attributes": {
+              "strip_prefix": "bazel-compile-commands-extractor-main",
+              "urls": [
+                "https://github.com/hedronvision/bazel-compile-commands-extractor/archive/refs/heads/main.zip"
+              ]
             }
           }
         },
@@ -190,7 +221,10 @@
             "openvdb",
             "eigen",
             "libigl",
-            "triangle"
+            "triangle",
+            "boost",
+            "cgal",
+            "hedron_compile_commands"
           ],
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO",

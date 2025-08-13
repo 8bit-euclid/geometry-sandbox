@@ -36,3 +36,15 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "cgal_tests",
+    srcs = ["cgal_tests.cpp"],
+    size = "small",
+    copts = ["-std=c++23"],
+    deps = [
+        "@cgal//:cgal",
+        "@boost//:boost_headers",
+        "@googletest//:gtest_main",
+    ],
+)
