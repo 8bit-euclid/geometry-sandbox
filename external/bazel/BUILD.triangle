@@ -13,10 +13,16 @@ cc_library(
         "-DTRILIBRARY",
         "-DANSI_DECLARATORS",
         "-DNO_TIMER",
+        # Suppress noisy warnings from 3rd-party Triangle source
+        "-Wno-unused-parameter",
+        "-Wno-unused-but-set-variable",
+        "-Wno-maybe-uninitialized",
+        "-Wno-sign-compare",
     ],
     defines = [
         "TRILIBRARY",
-        "ANSI_DECLARATORS", 
+        "ANSI_DECLARATORS",
         "NO_TIMER",
     ],
+    visibility = ["//visibility:public"],
 )

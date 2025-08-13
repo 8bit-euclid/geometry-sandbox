@@ -7,6 +7,7 @@ cc_binary(
     deps = [
         "@eigen//:eigen",
         "@libigl//:igl",
+        "@triangle//:triangle",
     ],
     linkopts = [],
 )

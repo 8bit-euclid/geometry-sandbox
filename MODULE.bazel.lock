@@ -138,10 +138,10 @@
   },
   "selectedYankedVersions": {},
   "moduleExtensions": {
-    "//bazel:extensions.bzl%non_module_deps": {
+    "//external/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "Z87urFGVLC2Ep3nrFaW4P83Mdoz0dQS8itR1Un0Kn/o=",
-        "usagesDigest": "Xj74BHqbg9mkUOqN5uTT61ZwlKFgv96wflP1Mx6dZfg=",
+        "bzlTransitiveDigest": "s6PkEnXzQgdvD9rDlYMFbDrbJSEUzww98MUjacV3WjY=",
+        "usagesDigest": "pTqPeF+cuQNAc753pD6beRCEO9YG71TvpcXvpb938O4=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -150,34 +150,36 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
             "attributes": {
               "remote": "https://github.com/AcademySoftwareFoundation/openvdb.git",
-              "build_file": "@@//bazel:BUILD.openvdb",
+              "build_file": "@@//external/bazel:BUILD.openvdb",
               "tag": "v11.0.0"
             }
           },
           "eigen": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file": "@@//bazel:BUILD.eigen",
+              "build_file": "@@//external/bazel:BUILD.eigen",
               "strip_prefix": "eigen-3.4.0",
               "urls": [
                 "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz"
-              ]
+              ],
+              "integrity": "sha256-hYYIT3H5veVF7n+m0AKIsmSit6w2B7l05U0T5xYsHHI="
             }
           },
           "triangle": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file": "@@//bazel:BUILD.triangle",
+              "build_file": "@@//external/bazel:BUILD.triangle",
               "strip_prefix": "triangle-master",
               "urls": [
                 "https://github.com/libigl/triangle/archive/refs/heads/master.zip"
-              ]
+              ],
+              "integrity": "sha256-e0iDKs1rZYdea27xnXrf4aLiHUmyL2t3ZsrMmlwbX8M="
             }
           },
           "libigl": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
             "attributes": {
-              "build_file": "@@//bazel:BUILD.libigl",
+              "build_file": "@@//external/bazel:BUILD.libigl",
               "remote": "https://github.com/libigl/libigl.git",
               "tag": "v2.4.0"
             }

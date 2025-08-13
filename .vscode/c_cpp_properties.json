@@ -4,9 +4,11 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/bazel-workspace/external/+non_module_deps+eigen",
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+libigl/include"
+                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+libigl/include",
+                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+triangle"
             ],
-            "cppStandard": "c++23"
+            "cppStandard": "c++23",
+            "cStandard": "c17"
         }
     ],
     "version": 4

@@ -1,0 +1,18 @@
+# Base style configuration for the project
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 100
+AllowShortFunctionsOnASingleLine: Empty
+AccessModifierOffset: -2
+NamespaceIndentation: None
+BreakBeforeBraces: Attach
+SpacesInParentheses: false
+SpaceAfterCStyleCast: true
+SpaceBeforeParens: ControlStatements
+SortIncludes: CaseSensitive
+IncludeBlocks: Preserve
+AlignAfterOpenBracket: Align
+DerivePointerAlignment: false
+PointerAlignment: Left

@@ -1,5 +1,15 @@
 {
    "files.associations": {
-      "dense": "cpp"
+      "dense": "cpp",
+      "ostream": "cpp"
+   },
+   // Enable formatting on save
+   "editor.formatOnSave": true,
+   // Use clang-format (built-in C/C++ extension or system) as default for C/C++
+   "[cpp]": {
+      "editor.defaultFormatter": "ms-vscode.cpptools"
+   },
+   "[c]": {
+      "editor.defaultFormatter": "ms-vscode.cpptools"
    }
 }
