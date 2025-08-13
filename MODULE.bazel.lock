@@ -140,7 +140,7 @@
   "moduleExtensions": {
     "//external/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "s6PkEnXzQgdvD9rDlYMFbDrbJSEUzww98MUjacV3WjY=",
+        "bzlTransitiveDigest": "00y5H0Mlc2Z/ePWG2D6Kglxvzgdw4ZDWMct4xgS0umw=",
         "usagesDigest": "pTqPeF+cuQNAc753pD6beRCEO9YG71TvpcXvpb938O4=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -150,14 +150,14 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
             "attributes": {
               "remote": "https://github.com/AcademySoftwareFoundation/openvdb.git",
-              "build_file": "@@//external/bazel:BUILD.openvdb",
+              "build_file": "@@//external/bazel:openvdb.BUILD",
               "tag": "v11.0.0"
             }
           },
           "eigen": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file": "@@//external/bazel:BUILD.eigen",
+              "build_file": "@@//external/bazel:eigen.BUILD",
               "strip_prefix": "eigen-3.4.0",
               "urls": [
                 "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz"
@@ -168,7 +168,7 @@
           "triangle": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
-              "build_file": "@@//external/bazel:BUILD.triangle",
+              "build_file": "@@//external/bazel:triangle.BUILD",
               "strip_prefix": "triangle-master",
               "urls": [
                 "https://github.com/libigl/triangle/archive/refs/heads/master.zip"
@@ -179,9 +179,9 @@
           "libigl": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
             "attributes": {
-              "build_file": "@@//external/bazel:BUILD.libigl",
+              "build_file": "@@//external/bazel:libigl.BUILD",
               "remote": "https://github.com/libigl/libigl.git",
-              "tag": "v2.4.0"
+              "commit": "40e7900ccbd767f1f360e0eb10f0f1a6432e0993"
             }
           }
         },

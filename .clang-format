@@ -7,7 +7,7 @@ ColumnLimit: 100
 AllowShortFunctionsOnASingleLine: Empty
 AccessModifierOffset: -2
 NamespaceIndentation: None
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Allman
 SpacesInParentheses: false
 SpaceAfterCStyleCast: true
 SpaceBeforeParens: ControlStatements
