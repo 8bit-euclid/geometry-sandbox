@@ -2,18 +2,8 @@
     "configurations": [
         {
             "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+eigen",
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+libigl/include",
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+triangle",
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+cgal",
-                // Core CGAL kernel + common utilities (provides CGAL/Simple_cartesian.h, centroid.h, etc.)
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+cgal/Kernel_23/include",
-                // Cartesian kernel (Simple_cartesian.h actually lives here)
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+cgal/Cartesian_kernel/include",
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+boost",
-                "${workspaceFolder}/bazel-workspace/external/googletest+/googletest/include"
-            ],
+            "compileCommands": "${workspaceFolder}/compile_commands.json",
+            "includePath": ["${workspaceFolder}"],
             "cppStandard": "c++23",
             "cStandard": "c17"
         }

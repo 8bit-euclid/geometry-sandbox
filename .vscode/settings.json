@@ -1,32 +1,8 @@
 {
-   "files.associations": {
-      "dense": "cpp",
-      "ostream": "cpp",
-      "numeric": "cpp",
-      "chrono": "cpp",
-      "functional": "cpp",
-      "__locale": "cpp",
-      "core": "cpp",
-      "superlusupport": "cpp",
-      "*.evaluator": "cpp",
-      "*.traits": "cpp",
-      "adolcforward": "cpp",
-      "alignedvector3": "cpp",
-      "autodiff": "cpp",
-      "bvh": "cpp",
-      "eulerangles": "cpp",
-      "fft": "cpp",
-      "kroneckerproduct": "cpp",
-      "mprealsupport": "cpp",
-      "numericaldiff": "cpp",
-      "openglsupport": "cpp",
-      "specialfunctions": "cpp",
-      "splines": "cpp"
-   },
-   // Enable formatting on save
-   "editor.formatOnSave": true,
    // Point C/C++ extension to Bazel-generated compile_commands.json (created via Hedron aspect)
    "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+   // Enable formatting on save
+   "editor.formatOnSave": true,
    // Use clang-format (built-in C/C++ extension or system) as default for C/C++
    "[cpp]": {
       "editor.defaultFormatter": "ms-vscode.cpptools"
