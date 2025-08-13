@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Bazel via Bazelisk
+        uses: bazelbuild/setup-bazelisk@v3
+        with:
+          bazelisk-version: v1.22.1
+
+      - name: Cache Bazel repository/downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/bazel
+            ~/.cache/bazelisk
+          key: bazel-${{ runner.os }}-${{ hashFiles('MODULE.bazel', '.bazelrc', 'external/bazel/**', 'lib/**', 'src/**', 'tests/**') }}
+          restore-keys: |
+            bazel-${{ runner.os }}-
+
+      - name: Show tool versions
+        run: |
+          bazel --version
+          gcc --version || true
+          clang --version || true
+
+      - name: Build
+        run: make build
+
+      - name: Test
+        run: make test
+
+      - name: Upload test logs (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bazel-testlogs
+          path: bazel-testlogs/**
+          if-no-files-found: ignore
