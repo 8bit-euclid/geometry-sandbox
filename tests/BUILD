@@ -1,13 +1,37 @@
 load("@rules_cc//cc:defs.bzl", "cc_test")
 
+# Separate test targets per external library for clearer isolation and faster
+# incremental builds.
+
 cc_test(
-    name = "integration_tests",
-    srcs = ["integration_tests.cpp"],
+    name = "eigen_tests",
+    srcs = ["eigen_tests.cpp"],
     size = "small",
     copts = ["-std=c++23"],
     deps = [
         "@eigen//:eigen",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "libigl_tests",
+    srcs = ["libigl_tests.cpp"],
+    size = "small",
+    copts = ["-std=c++23"],
+    deps = [
+        "@eigen//:eigen",  # libigl headers depend on Eigen
         "@libigl//:igl",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
+    name = "triangle_tests",
+    srcs = ["triangle_tests.cpp"],
+    size = "small",
+    copts = ["-std=c++23"],
+    deps = [
         "@triangle//:triangle",
         "@googletest//:gtest_main",
     ],

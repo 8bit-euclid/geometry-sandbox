@@ -1,6 +1,6 @@
 # Geometry Sandbox
 
-Lightweight C++23 sandbox for experimenting with geometry / meshing ideas and integrating third‑party geometry libs (Eigen, Triangle, Geogram, CGAL, libigl, OpenVDB).
+Lightweight C++23 sandbox for experimenting with geometry / meshing ideas and integrating third‑party geometry libs (Eigen, Triangle, Geogram, CGAL, libigl, Pablo, OpenVDB).
 
 ## Prerequisites
 
