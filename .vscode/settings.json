@@ -1,7 +1,8 @@
 {
    "files.associations": {
       "dense": "cpp",
-      "ostream": "cpp"
+      "ostream": "cpp",
+      "numeric": "cpp"
    },
    // Enable formatting on save
    "editor.formatOnSave": true,

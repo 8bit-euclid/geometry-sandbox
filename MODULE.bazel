@@ -10,6 +10,9 @@ module(
 # C++ rules
 bazel_dep(name = "rules_cc", version = "0.2.0")
 
+# GoogleTest for C++ unit testing
+bazel_dep(name = "googletest", version = "1.14.0.bcr.1")
+
 # For external dependencies that don't have Bazel modules, we need to use module extensions.
 non_module_deps = use_extension("//external/bazel:extensions.bzl", "non_module_deps")
 use_repo(non_module_deps, "openvdb", "eigen", "libigl", "triangle")

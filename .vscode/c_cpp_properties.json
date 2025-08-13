@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/bazel-workspace/external/+non_module_deps+eigen",
                 "${workspaceFolder}/bazel-workspace/external/+non_module_deps+libigl/include",
-                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+triangle"
+                "${workspaceFolder}/bazel-workspace/external/+non_module_deps+triangle",
+                "${workspaceFolder}/bazel-workspace/external/googletest+/googletest/include"
             ],
             "cppStandard": "c++23",
             "cStandard": "c17"

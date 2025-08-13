@@ -1,4 +1,4 @@
-.PHONY: build run clean verbose v
+.PHONY: build run clean verbose v test help
 
 # Default target
 all: build
@@ -37,6 +37,32 @@ build:
 run: build
 	@echo "Running main application... (verbose=$(VERBOSE))"
 	$(ECHO_PREFIX)bazel run $(BAZEL_VERBOSE_FLAGS) //src:main
+
+# Run tests.
+# Variables:
+#   TEST_TARGETS   (default //...) Bazel targets to test
+#   TEST_FILTER    (optional) GoogleTest filter pattern (e.g., EigenSuite.*:TriangleSuite.*-TriangleSuite.SquareTriangulation)
+#   SHOW_TESTS=1   Stream test output (see individual test status) instead of only on failure.
+TEST_TARGETS ?= //...
+TEST_FILTER ?=
+SHOW_TESTS ?= 0
+
+ifeq ($(strip $(TEST_FILTER)),)
+	GTEST_FILTER_ARGS =
+else
+	# Pass filter to each test via --test_arg
+	GTEST_FILTER_ARGS = --test_arg=--gtest_filter=$(TEST_FILTER)
+endif
+
+ifeq ($(SHOW_TESTS),1)
+	TEST_OUTPUT_MODE = --test_output=streamed
+else
+	TEST_OUTPUT_MODE = --test_output=errors
+endif
+
+test:
+	@echo "Running tests ($(TEST_TARGETS)) filter='$(TEST_FILTER)' show_tests=$(SHOW_TESTS) (verbose=$(VERBOSE))"
+	$(ECHO_PREFIX)bazel test $(BAZEL_VERBOSE_FLAGS) $(TEST_TARGETS) $(GTEST_FILTER_ARGS) $(TEST_OUTPUT_MODE)
 
 # Clean build artifacts
 clean:
