@@ -13,7 +13,15 @@ bazel_dep(name = "rules_cc", version = "0.2.0")
 # GoogleTest for C++ unit testing
 bazel_dep(name = "googletest", version = "1.14.0.bcr.1")
 
+# Hedron's Compile Commands Extractor for Bazel
+# https://github.com/hedronvision/bazel-compile-commands-extractor
+bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
+git_override(
+    module_name = "hedron_compile_commands",
+    remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
+    commit = "abb61a688167623088f8768cc9264798df6a9d10", # Pin with a specific commit hash
+)
 
 # For external dependencies that don't have Bazel modules, we need to use module extensions.
 non_module_deps = use_extension("//third_party/bazel:extensions.bzl", "non_module_deps")
-use_repo(non_module_deps, "openvdb", "eigen", "libigl", "triangle", "boost", "cgal", "hedron_compile_commands")
+use_repo(non_module_deps, "eigen", "libigl", "triangle", "boost", "cgal", "openvdb")

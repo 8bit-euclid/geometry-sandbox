@@ -140,7 +140,7 @@
   "moduleExtensions": {
     "//third_party/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "6FJZ/o2jyyHfFA2sq6o2SBYpPeIG8/Axi4UkSUOhqpQ=",
+        "bzlTransitiveDigest": "D785KrnBcQlJ2l4VijWZWwnqWusMpPJrXlHy3crYw1k=",
         "usagesDigest": "By3jf7HFkiIdZPsfYTGTxRqxk9qTioij34ZbcLIQLIE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -205,15 +205,6 @@
               "build_file": "@@//third_party/bazel:openvdb.BUILD",
               "tag": "v11.0.0"
             }
-          },
-          "hedron_compile_commands": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "strip_prefix": "bazel-compile-commands-extractor-main",
-              "urls": [
-                "https://github.com/hedronvision/bazel-compile-commands-extractor/archive/refs/heads/main.zip"
-              ]
-            }
           }
         },
         "moduleExtensionMetadata": {
@@ -223,8 +214,7 @@
             "triangle",
             "boost",
             "cgal",
-            "openvdb",
-            "hedron_compile_commands"
+            "openvdb"
           ],
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO",

@@ -40,7 +40,8 @@ RUN apt-get update && apt-get install -y \
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang-18 100 \
     && update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-18 100 \
     && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-18 100 \
-    && update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-18 100
+    && update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-18 100 \
+    && update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-18 100
 
 # Set environment variables for Clang and Bazel
 ENV CC=/usr/bin/clang-18 \

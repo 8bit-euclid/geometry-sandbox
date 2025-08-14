@@ -40,7 +40,7 @@ run: build
 
 # Run tests.
 # Variables:
-#   TEST_TARGETS   (default //...) Bazel targets to test
+#   TEST_TARGETS   (default: //...) Bazel targets to test
 #   TEST_FILTER    (optional) GoogleTest filter pattern (e.g., EigenSuite.*:TriangleSuite.*-TriangleSuite.SquareTriangulation)
 #   SHOW_TESTS=1   Stream test output (see individual test status) instead of only on failure.
 TEST_TARGETS ?= //...
@@ -69,18 +69,7 @@ clean:
 	@echo "Cleaning build artifacts..."
 	bazel clean
 
-# Refresh compile_commands.json for IDEs (clangd, vscode C++ extension)
-# Optional vars:
-#   CC_TARGETS   (default //...) scope of targets to extract (mirrors rule)
-#   FAST=1       skip full rebuild; just run the refresh script
-CC_TARGETS ?= //...
+# Refresh compile_commands.json for clangd language server
 compile_commands:
-	@echo "Refreshing compile_commands.json (targets=$(CC_TARGETS))"
-	# Run the hedron refresh rule (will create or update compile_commands.json)
-	$(ECHO_PREFIX)bazel run $(BAZEL_VERBOSE_FLAGS) //tools/compile_commands:refresh_compile_commands || exit 1
-	# If the script placed the file elsewhere under bazel-out, copy it to repo root (idempotent if already here)
-	@if [ ! -f compile_commands.json ]; then \
-	  out_file=$$(find bazel-out -maxdepth 6 -name compile_commands.json | head -n1); \
-	  if [ -n "$$out_file" ]; then cp "$$out_file" ./compile_commands.json; fi; \
-	fi; \
-	if [ -f compile_commands.json ]; then echo "compile_commands.json updated"; else echo "WARNING: compile_commands.json not found"; fi
+	@echo "Refreshing compile_commands.json..."
+	bazel run @hedron_compile_commands//:refresh_all

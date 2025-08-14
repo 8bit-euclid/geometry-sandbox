@@ -62,8 +62,6 @@ cp bazel-out/**/compile_commands.json ./compile_commands.json
 
 VS Code is configured (`.vscode/settings.json`) to point to `compile_commands.json` when present.
 
-Renovate will keep `hedron_compile_commands` up to date (minor/patch auto‑merged).
-
 ## License
 
 See `LICENSE`.

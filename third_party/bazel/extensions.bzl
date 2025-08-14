@@ -65,17 +65,8 @@ def _non_module_deps_impl(module_ctx):
         tag = "v11.0.0",
     )
 
-    # Hedron compile commands extractor (not in BCR as module yet, use http_archive)
-    http_archive(
-        name = "hedron_compile_commands",
-        strip_prefix = "bazel-compile-commands-extractor-main",
-        urls = [
-            "https://github.com/hedronvision/bazel-compile-commands-extractor/archive/refs/heads/main.zip",
-        ],
-    )
-
     return module_ctx.extension_metadata(
-    root_module_direct_deps = ["eigen", "libigl", "triangle", "boost", "cgal", "openvdb", "hedron_compile_commands"],
+    root_module_direct_deps = ["eigen", "libigl", "triangle", "boost", "cgal", "openvdb"],
         root_module_direct_dev_deps = [],
     )
 
