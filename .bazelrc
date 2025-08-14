@@ -1,17 +1,28 @@
 # Enable Bzlmod (MODULE.bazel system)
 common --enable_bzlmod
 
-# Enable parallel builds
-build --jobs=32  # Use all available cores
-build --local_resources=cpu=HOST_CPUS*.9  # Use 90% of available CPU resources
-
 # Use clang as the default C++ compiler
 build --repo_env=CC=clang
 build --repo_env=CXX=clang++
 
-# C++23 configuration
+# C++23 and compiler configuration
 build --cxxopt=-std=c++23
 build --host_cxxopt=-std=c++23
+build --cxxopt=-Wall
+build --cxxopt=-Wextra
+build --cxxopt=-Wpedantic
+
+# Enable parallel builds
+build --jobs=32  # Use all available cores
+build --local_resources=cpu=HOST_CPUS*.9  # Use 90% of available CPU resources
+
+# Modern C++ features
+build --cxxopt=-fmodules  # Enable C++20 modules
+# build --cxxopt=-fcoroutines # Enable coroutines (uncomment if needed)
+
+# Suppress specific warnings
+build --cxxopt=-Wno-modules-ambiguous-internal-linkage
+build --cxxopt=-Wno-deprecated-declarations
 
 # Optimization flags
 build --copt=-O2
@@ -22,14 +33,3 @@ build:debug --copt=-g
 build:debug --copt=-O0
 build:debug --strip=never
 
-# Compiler-specific flags
-build --cxxopt=-Wall
-build --cxxopt=-Wextra
-build --cxxopt=-Wpedantic
-
-# Modern C++ features
-build --cxxopt=-fmodules  # Enable C++20 modules
-# build --cxxopt=-fcoroutines # Enable coroutines (standard C++20 flag)
-
-# Suppress specific warnings
-build --cxxopt=-Wno-modules-ambiguous-internal-linkage  # Suppress module-related warnings in third-party code

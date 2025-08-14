@@ -13,10 +13,8 @@ VERBOSE ?= 0
 
 ifeq ($(VERBOSE),1)
   BAZEL_VERBOSE_FLAGS = --verbose_failures --subcommands
-  ECHO_PREFIX =
 else
   BAZEL_VERBOSE_FLAGS =
-  ECHO_PREFIX = @
 endif
 
 verbose:
@@ -25,18 +23,15 @@ verbose:
 	echo "(Re-invoking with VERBOSE=1) -> $$targets"; \
 	$(MAKE) VERBOSE=1 $$targets
 
-# Short alias: `make v build` or just `make v`
-v: verbose
-
 # Build the project (use `make verbose build` for verbose output)
 build:
 	@echo "Building project... (verbose=$(VERBOSE))"
-	$(ECHO_PREFIX)bazel build $(BAZEL_VERBOSE_FLAGS) //...
+	bazel build $(BAZEL_VERBOSE_FLAGS) //...
 
 # Run the main application
 run: build
 	@echo "Running main application... (verbose=$(VERBOSE))"
-	$(ECHO_PREFIX)bazel run $(BAZEL_VERBOSE_FLAGS) //src:main
+	bazel run $(BAZEL_VERBOSE_FLAGS) //src:main
 
 # Run tests.
 # Variables:
@@ -61,15 +56,15 @@ else
 endif
 
 test:
-	@echo "Running tests ($(TEST_TARGETS)) filter='$(TEST_FILTER)' show_tests=$(SHOW_TESTS) (verbose=$(VERBOSE))"
-	$(ECHO_PREFIX)bazel test $(BAZEL_VERBOSE_FLAGS) $(TEST_TARGETS) $(GTEST_FILTER_ARGS) $(TEST_OUTPUT_MODE)
-
-# Clean build artifacts
-clean:
-	@echo "Cleaning build artifacts..."
-	bazel clean
+	@echo "Running tests: targets=$(TEST_TARGETS) filter='$(TEST_FILTER)' show_tests=$(SHOW_TESTS) verbose=$(VERBOSE)"
+	bazel test $(BAZEL_VERBOSE_FLAGS) $(TEST_TARGETS) $(GTEST_FILTER_ARGS) $(TEST_OUTPUT_MODE)
 
 # Refresh compile_commands.json for clangd language server
 compile_commands:
 	@echo "Refreshing compile_commands.json..."
 	bazel run @hedron_compile_commands//:refresh_all
+	
+# Clean build artifacts
+clean:
+	@echo "Cleaning build artifacts..."
+	bazel clean

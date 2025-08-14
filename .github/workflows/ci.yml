@@ -31,8 +31,8 @@ jobs:
       - name: Show tool versions
         run: |
           bazel --version
-          gcc --version || true
           clang --version || true
+          gcc --version || true
 
       - name: Build
         run: make build
