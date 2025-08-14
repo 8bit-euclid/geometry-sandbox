@@ -12,9 +12,9 @@ all: build
 VERBOSE ?= 0
 
 ifeq ($(VERBOSE),1)
-  BAZEL_VERBOSE_FLAGS = --verbose_failures --subcommands
+  BAZEL_FLAGS = --verbose_failures --subcommands
 else
-  BAZEL_VERBOSE_FLAGS =
+  BAZEL_FLAGS =
 endif
 
 verbose:
@@ -26,12 +26,12 @@ verbose:
 # Build the project (use `make verbose build` for verbose output)
 build:
 	@echo "Building project... (verbose=$(VERBOSE))"
-	bazel build $(BAZEL_VERBOSE_FLAGS) //...
+	bazel build $(BAZEL_FLAGS) //...
 
 # Run the main application
 run: build
 	@echo "Running main application... (verbose=$(VERBOSE))"
-	bazel run $(BAZEL_VERBOSE_FLAGS) //src:main
+	bazel run $(BAZEL_FLAGS) //src:main
 
 # Run tests.
 # Variables:
@@ -57,14 +57,14 @@ endif
 
 test:
 	@echo "Running tests: targets=$(TEST_TARGETS) filter='$(TEST_FILTER)' show_tests=$(SHOW_TESTS) verbose=$(VERBOSE)"
-	bazel test $(BAZEL_VERBOSE_FLAGS) $(TEST_TARGETS) $(GTEST_FILTER_ARGS) $(TEST_OUTPUT_MODE)
+	bazel test $(BAZEL_FLAGS) $(TEST_TARGETS) $(GTEST_FILTER_ARGS) $(TEST_OUTPUT_MODE)
 
 # Refresh compile_commands.json for clangd language server
 compile_commands:
 	@echo "Refreshing compile_commands.json..."
-	bazel run @hedron_compile_commands//:refresh_all
+	bazel run $(BAZEL_FLAGS) @hedron_compile_commands//:refresh_all
 	
 # Clean build artifacts
 clean:
 	@echo "Cleaning build artifacts..."
-	bazel clean
+	bazel clean --expunge

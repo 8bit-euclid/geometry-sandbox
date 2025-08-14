@@ -1,5 +1,10 @@
 # Enable Bzlmod (MODULE.bazel system)
 common --enable_bzlmod
+common --lockfile_mode=update
+
+# Redirect Bazel output and symlinks to a temporary location
+startup --output_base=/tmp/bazel-output
+build --symlink_prefix=/tmp/bazel-output/symlinks/
 
 # Use clang as the default C++ compiler
 build --repo_env=CC=clang
@@ -20,10 +25,6 @@ build --local_resources=cpu=HOST_CPUS*.9  # Use 90% of available CPU resources
 build --cxxopt=-fmodules  # Enable C++20 modules
 # build --cxxopt=-fcoroutines # Enable coroutines (uncomment if needed)
 
-# Suppress specific warnings
-build --cxxopt=-Wno-modules-ambiguous-internal-linkage
-build --cxxopt=-Wno-deprecated-declarations
-
 # Optimization flags
 build --copt=-O2
 build --copt=-DNDEBUG
@@ -32,4 +33,8 @@ build --copt=-DNDEBUG
 build:debug --copt=-g
 build:debug --copt=-O0
 build:debug --strip=never
+
+# Suppress specific warnings
+build --cxxopt=-Wno-modules-ambiguous-internal-linkage
+build --cxxopt=-Wno-deprecated-declarations
 
