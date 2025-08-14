@@ -28,10 +28,7 @@ build --cxxopt=-Wextra
 build --cxxopt=-Wpedantic
 
 # Modern C++ features
-build --cxxopt=-fexperimental-library
-build --cxxopt=-stdlib=libc++  # Use LLVM's C++ standard library
 build --cxxopt=-fmodules  # Enable C++20 modules
-build --linkopt=-stdlib=libc++  # Link against LLVM's C++ standard library
 # build --cxxopt=-fcoroutines # Enable coroutines (standard C++20 flag)
 
 # Suppress specific warnings
