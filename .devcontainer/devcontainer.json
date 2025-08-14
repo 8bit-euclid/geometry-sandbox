@@ -15,7 +15,7 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode.cpptools",
+                "llvm-vs-code-extensions.vscode-clangd",
                 "bazelbuild.vscode-bazel"
             ],
             "settings": {

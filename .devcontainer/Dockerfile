@@ -22,21 +22,30 @@ RUN apt-get update && apt-get install -y \
     curl \
     wget \
     git \
-    # C++ development tools
+    # C++ development tools (clang/clang++ support)
+    clang-18 \
+    clangd-18 \ 
+    libc++-18-dev \
+    libc++abi-18-dev \
+    lldb \ 
+    # C++ development tools (gcc/g++ support)
     build-essential \
     gcc-13 \
     g++-13 \
-    clang-18 \
-    libc++-18-dev \
-    libc++abi-18-dev \
-    # Additional development tools
     gdb \
     valgrind \
     && rm -rf /var/lib/apt/lists/*
 
-# Set GCC-13 as default (supports C++23)
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 100 \
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 100
+# Set clang-18 as default C/C++ compiler
+RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang-18 100 \
+    && update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-18 100 \
+    && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-18 100 \
+    && update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-18 100
+
+# Set environment variables for Clang and Bazel
+ENV CC=/usr/bin/clang-18 \
+    CXX=/usr/bin/clang++-18 \
+    BAZEL_USE_CPP_ONLY_TOOLCHAIN=1
 
 # Install Bazelisk as the Bazel binary (wrapper and version manager for Bazel)
 RUN wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.26.0/bazelisk-linux-amd64 \

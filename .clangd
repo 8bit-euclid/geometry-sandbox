@@ -1,0 +1,23 @@
+# clangd project configuration
+# Docs: https://clangd.llvm.org/config
+
+CompileFlags:
+  # Drop older standard flag injected by toolchain so clangd settles on C++23.
+  Remove: ["-std=c++17"]
+  # Ensure the intended standard is always present (idempotent if already there).
+  Add: ["-std=c++23"]
+  # If modules or coroutines flags cause issues with your local clang version,
+  # uncomment to suppress them:
+  # Remove: ["-fmodules-ts", "-fcoroutines"]
+
+# You can fine‑tune index behavior; defaults are usually fine.
+# Index:
+#   Background: true
+
+# Example of suppressing specific warnings in editor diagnostics (optional):
+# Diagnostics:
+#   Suppress: ["-Wunused-parameter"]
+
+# Header insertion style (leave default unless you prefer angled includes):
+# InlayHints:
+#   Enabled: true

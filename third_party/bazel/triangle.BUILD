@@ -17,7 +17,7 @@ cc_library(
         # Suppress noisy warnings from 3rd-party Triangle source
         "-Wno-unused-parameter",
         "-Wno-unused-but-set-variable",
-        "-Wno-maybe-uninitialized",
+        "-Wno-uninitialized",  # Clang equivalent of -Wno-maybe-uninitialized
         "-Wno-sign-compare",
     ],
     defines = [

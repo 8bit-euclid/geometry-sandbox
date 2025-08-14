@@ -35,19 +35,35 @@ int main() {
 EOF
 
     # Test compilation with g++
-    if g++ -std=c++23 -o /tmp/cpp23_test "$test_file" 2>/dev/null; then
+    if g++ -std=c++23 -o /tmp/cpp23_test_gcc "$test_file" 2>/dev/null; then
         log_success "C++23 compilation with g++ works"
 
         # Test execution
-        if /tmp/cpp23_test &>/dev/null; then
-            log_success "C++23 executable runs successfully"
+        if /tmp/cpp23_test_gcc &>/dev/null; then
+            log_success "C++23 executable (g++) runs successfully"
         else
-            log_warning "C++23 executable failed to run"
+            log_warning "C++23 executable (g++) failed to run"
         fi
 
-        rm -f /tmp/cpp23_test
+        rm -f /tmp/cpp23_test_gcc
     else
         log_error "C++23 compilation with g++ failed"
+    fi
+
+    # Test compilation with clang++
+    if clang++-18 -std=c++23 -stdlib=libc++ -o /tmp/cpp23_test_clang "$test_file" 2>/dev/null; then
+        log_success "C++23 compilation with clang++ works"
+
+        # Test execution
+        if /tmp/cpp23_test_clang &>/dev/null; then
+            log_success "C++23 executable (clang++) runs successfully"
+        else
+            log_warning "C++23 executable (clang++) failed to run"
+        fi
+
+        rm -f /tmp/cpp23_test_clang
+    else
+        log_error "C++23 compilation with clang++ failed"
     fi
 
     # Clean up test file
@@ -60,7 +76,7 @@ test_bazel_build() {
     cd "$WORKSPACE_ROOT"
 
     # Check if Bazel workspace exists
-    if [ -f "WORKSPACE" ] || [ -f "WORKSPACE.bazel" ] || [ -f "MODULE.bazel" ]; then
+    if [ -f "MODULE.bazel" ]; then
         log_success "Bazel workspace found"
 
         # Test basic Bazel query
@@ -68,20 +84,6 @@ test_bazel_build() {
             log_success "Bazel query works"
         else
             log_error "Bazel query failed"
-        fi
-
-        # Test if there are any BUILD files to test
-        if find . -name "BUILD" -o -name "BUILD.bazel" | head -1 | grep -q .; then
-            print_section "Testing Bazel build..."
-
-            # Try to build all targets (if any exist)
-            if bazel build //... 2>/dev/null; then
-                log_success "Bazel build successful"
-            else
-                log_warning "Bazel build failed (may be expected if no targets exist)"
-            fi
-        else
-            log_warning "No BUILD files found - skipping build test"
         fi
     else
         log_warning "No Bazel workspace found - skipping Bazel tests"

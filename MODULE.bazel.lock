@@ -140,20 +140,12 @@
   "moduleExtensions": {
     "//third_party/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "d1OOwHt45nDA3Ek5JnVBmqhhJ98+0TF+EZq+Dr8I9qk=",
+        "bzlTransitiveDigest": "6FJZ/o2jyyHfFA2sq6o2SBYpPeIG8/Axi4UkSUOhqpQ=",
         "usagesDigest": "By3jf7HFkiIdZPsfYTGTxRqxk9qTioij34ZbcLIQLIE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
         "generatedRepoSpecs": {
-          "openvdb": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
-            "attributes": {
-              "remote": "https://github.com/AcademySoftwareFoundation/openvdb.git",
-              "build_file": "@@//third_party/bazel:openvdb.BUILD",
-              "tag": "v11.0.0"
-            }
-          },
           "eigen": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
@@ -206,6 +198,14 @@
               "integrity": "sha256-F+6GdQuYsO/vNWtw8b7WtUGzVzvSkR9A/UAzjTVFJvU="
             }
           },
+          "openvdb": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
+            "attributes": {
+              "remote": "https://github.com/AcademySoftwareFoundation/openvdb.git",
+              "build_file": "@@//third_party/bazel:openvdb.BUILD",
+              "tag": "v11.0.0"
+            }
+          },
           "hedron_compile_commands": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
@@ -218,12 +218,12 @@
         },
         "moduleExtensionMetadata": {
           "explicitRootModuleDirectDeps": [
-            "openvdb",
             "eigen",
             "libigl",
             "triangle",
             "boost",
             "cgal",
+            "openvdb",
             "hedron_compile_commands"
           ],
           "explicitRootModuleDirectDevDeps": [],

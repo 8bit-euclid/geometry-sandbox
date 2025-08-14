@@ -1,1 +1,1 @@
-# BUILD file for external dependencies
+# BUILD file for third-party dependencies

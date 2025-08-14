@@ -1,6 +1,14 @@
 # Enable Bzlmod (MODULE.bazel system)
 common --enable_bzlmod
 
+# Enable parallel builds
+build --jobs=32  # Use all available cores
+build --local_resources=cpu=HOST_CPUS*.9  # Use 90% of available CPU resources
+
+# Use clang as the default C++ compiler
+build --repo_env=CC=clang
+build --repo_env=CXX=clang++
+
 # C++23 configuration
 build --cxxopt=-std=c++23
 build --host_cxxopt=-std=c++23
@@ -20,5 +28,11 @@ build --cxxopt=-Wextra
 build --cxxopt=-Wpedantic
 
 # Modern C++ features
-build --cxxopt=-fcoroutines
-build --cxxopt=-fmodules-ts
+build --cxxopt=-fexperimental-library
+build --cxxopt=-stdlib=libc++  # Use LLVM's C++ standard library
+build --cxxopt=-fmodules  # Enable C++20 modules
+build --linkopt=-stdlib=libc++  # Link against LLVM's C++ standard library
+# build --cxxopt=-fcoroutines # Enable coroutines (standard C++20 flag)
+
+# Suppress specific warnings
+build --cxxopt=-Wno-modules-ambiguous-internal-linkage  # Suppress module-related warnings in third-party code
