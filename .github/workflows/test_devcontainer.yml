@@ -34,4 +34,6 @@ jobs:
           # Enable GitHub Actions cache for Docker build layers
           cacheFrom: type=gha
           cacheTo: type=gha,mode=max
+          # Do not push images in this workflow; just build and run tests
+          push: never
 
