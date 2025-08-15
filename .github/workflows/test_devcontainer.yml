@@ -18,6 +18,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+
+      - name: Setup Docker Buildx (for GHA cache backend)
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+          driver: docker-container
+
       # Build the devcontainer and run its workspace tests
       - name: Build and Test Devcontainer
         uses: devcontainers/ci@v0.3
