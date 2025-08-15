@@ -123,8 +123,8 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         # CGAL typically depends on these libraries
-        # "@gmp",  # GNU Multiple Precision Arithmetic Library (LGPL) - commented out as not available
-        # "@mpfr", # Multiple Precision Floating-Point Reliable Library (LGPL) - commented out as not available
+        # "@gmp",  # GNU Multiple Precision Arithmetic Library (LGPL)
+        # "@mpfr", # Multiple Precision Floating-Point Reliable Library (LGPL)
     ],
 )
 

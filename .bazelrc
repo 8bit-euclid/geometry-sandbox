@@ -2,10 +2,6 @@
 common --enable_bzlmod
 common --lockfile_mode=update
 
-# Redirect Bazel output and symlinks to a temporary location
-startup --output_base=/tmp/bazel-output
-build --symlink_prefix=/tmp/bazel-output/symlinks/
-
 # Use clang as the default C++ compiler
 build --repo_env=CC=clang
 build --repo_env=CXX=clang++
