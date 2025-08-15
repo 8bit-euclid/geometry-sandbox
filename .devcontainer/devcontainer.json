@@ -16,10 +16,12 @@
         "vscode": {
             "extensions": [
                 "bazelbuild.vscode-bazel",
-                "llvm-vs-code-extensions.vscode-clangd"
+                "llvm-vs-code-extensions.vscode-clangd",
+                "augment.vscode-augment"
             ],
             "settings": {
                 "bazel.buildifierExecutable": "/usr/local/bin/buildifier",
+                "clangd.path": "/usr/bin/clangd",
                 "clangd.arguments": [
                     "--background-index",
                     "--limit-results=100",

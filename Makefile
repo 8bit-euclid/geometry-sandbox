@@ -63,7 +63,7 @@ test:
 compile_commands:
 	@echo "Refreshing compile_commands.json..."
 	bazel run $(BAZEL_FLAGS) @hedron_compile_commands//:refresh_all
-	
+		
 # Clean build artifacts
 clean:
 	@echo "Cleaning build artifacts..."

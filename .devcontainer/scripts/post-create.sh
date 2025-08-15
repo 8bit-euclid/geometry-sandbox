@@ -4,14 +4,13 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/shared-utils.sh"
 
-# Run workspace setup first
-if ! bash "$SCRIPT_DIR/setup-workspace.sh"; then
-    echo ""
-    echo "❌ Workspace setup failed!"
-    exit 1
-fi
+# Build project
+make build
 
-# Run tests - will exit with error code if tests fail
+# Generate compile_commands.json
+make compile_commands
+
+# Run devcontainer tests
 echo ""
 if bash "$SCRIPT_DIR/test-workspace.sh"; then
     echo ""

@@ -140,7 +140,7 @@
   "moduleExtensions": {
     "//third_party/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "UG3MQMlhI13fegqhZBnfRHUfUH5OhFVUvfFSb9E49mg=",
+        "bzlTransitiveDigest": "YcCneRdW+1lalKY5kkuMP1pgMvSd61z1qKgfGb78ahc=",
         "usagesDigest": "By3jf7HFkiIdZPsfYTGTxRqxk9qTioij34ZbcLIQLIE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -172,11 +172,11 @@
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
             "attributes": {
               "build_file": "@@//third_party/bazel:boost.BUILD",
-              "strip_prefix": "boost_1_86_0",
+              "strip_prefix": "boost_1_89_0",
               "urls": [
-                "https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz"
+                "https://archives.boost.io/release/1.89.0/source/boost_1_89_0.tar.gz"
               ],
-              "integrity": "sha256-JXXnT/w+8c0Lq6wsHui9tXgqDuZysZEtpA5bS1kcoB8="
+              "integrity": "sha256-nedY23VegzCgHZlbCiTQl5gEhACsJcA/xeqb42SxPJM="
             }
           },
           "cgal": {
