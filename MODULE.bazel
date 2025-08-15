@@ -19,9 +19,9 @@ bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 git_override(
     module_name = "hedron_compile_commands",
     remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
-    commit = "abb61a688167623088f8768cc9264798df6a9d10", # Pin with a specific commit hash
+    commit = "abb61a688167623088f8768cc9264798df6a9d10",  # Pin with a specific commit hash
 )
 
 # For external dependencies that don't have Bazel modules, we need to use module extensions.
 non_module_deps = use_extension("//third_party/bazel:extensions.bzl", "non_module_deps")
-use_repo(non_module_deps, "eigen", "triangle", "boost", "cgal", "openvdb")
+use_repo(non_module_deps, "eigen", "boost", "cgal", "geogram", "openvdb", "triangle")

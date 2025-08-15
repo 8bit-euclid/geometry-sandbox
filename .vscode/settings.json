@@ -1,11 +1,20 @@
 {
    // Enable formatting on save
    "editor.formatOnSave": true,
+   "window.zoomLevel": 2,
    // Use clang-format (built-in C/C++ extension or system) as default for C/C++
    "[cpp]": {
       "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
    },
    "[c]": {
       "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+   },
+   "[bazel]": {
+      "editor.defaultFormatter": "BazelBuild.vscode-bazel",
+      "editor.formatOnSave": true
+   },
+   "[starlark]": {
+      "editor.defaultFormatter": "BazelBuild.vscode-bazel",
+      "editor.formatOnSave": true
    }
 }

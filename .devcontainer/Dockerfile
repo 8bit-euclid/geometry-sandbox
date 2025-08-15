@@ -49,7 +49,7 @@ ENV CC=/usr/bin/clang-18 \
     BAZEL_USE_CPP_ONLY_TOOLCHAIN=1
 
 # Install Bazelisk as the Bazel binary (wrapper and version manager for Bazel)
-RUN wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.26.0/bazelisk-linux-amd64 \
+RUN wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.27.0/bazelisk-linux-amd64 \
     && chmod +x /usr/local/bin/bazel
 
 # Install Buildifier (Bazel BUILD file formatter and linter)
@@ -59,6 +59,9 @@ RUN wget -O /usr/local/bin/buildifier https://github.com/bazelbuild/buildtools/r
 # Add vscode user to sudo group
 RUN usermod -aG sudo vscode \
     && echo 'vscode ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# Suppress Ubuntu MOTD for user 'vscode'
+RUN touch /home/vscode/.hushlogin && chown vscode:vscode /home/vscode/.hushlogin
 
 # Switch to vscode user
 USER vscode

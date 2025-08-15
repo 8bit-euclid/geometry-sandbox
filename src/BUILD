@@ -3,9 +3,9 @@ load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
 cc_binary(
     name = "main",
     srcs = ["main.cpp"],
-    deps = [
-        "@eigen//:eigen",
-        "@triangle//:triangle",
-    ],
     linkopts = [],
+    deps = [
+        "@eigen",
+        "@triangle",
+    ],
 )

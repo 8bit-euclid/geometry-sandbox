@@ -1,22 +1,27 @@
 """
-Build file for CGAL library
+Build file for CGAL library.
 
 This BUILD file provides two targets:
 - :free - LGPL-licensed CGAL components (safe for commercial use with LGPL compliance)
 - :commercial - All CGAL components including GPL packages (requires commercial licenses)
 
 CGAL has a dual license structure:
-- LGPL v3+ for foundation components (included in :free target)
-- GPL v3+ for advanced algorithms (listed in CGAL_GPL_PACKAGES, requires commercial license)
+- LGPLv3 for foundation components (included in the :free target)
+- GPLv3 for advanced algorithms (listed in the :commericial target)
 
 For commercial use of GPL components, purchase licenses from GeometryFactory.
 """
+
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+
+package(default_visibility = ["//visibility:public"])
+
 licenses([
     # Note: CGAL has a dual license structure: GPL/LGPL for open source
     #       and commercial licenses. We only include LGPL-compatible parts
     #       that are suitable for commercial use without copyleft requirements.
     "restricted",  # Commercial users need commercial license from GeometryFactory
-    "reciprocal",  # LGPL v3+
+    "reciprocal",  # LGPLv3
 ])
 
 exports_files(["LICENSE"])
@@ -100,11 +105,9 @@ CGAL_EXCLUDE_FILES = [
 # Files known to be under LGPL license (base layer)
 CGAL_BASE_HEADER_FILES = glob(
     include = CGAL_LGPL_PACKAGES,
-    exclude = CGAL_EXCLUDE_FILES,
     allow_empty = True,
+    exclude = CGAL_EXCLUDE_FILES,
 )
-
-load("@rules_cc//cc:cc_library.bzl", "cc_library")
 
 # WARNING: Commercial users should verify license compliance
 # This target only includes LGPL base components
@@ -120,7 +123,6 @@ cc_library(
         "CGAL_USE_MPFR",
     ],
     includes = [pkg + "/include" for pkg in CGAL_LGPL_PACKAGE_NAMES],
-    visibility = ["//visibility:public"],
     deps = [
         # CGAL typically depends on these libraries
         # "@gmp",  # GNU Multiple Precision Arithmetic Library (LGPL)
@@ -220,8 +222,8 @@ cc_library(
     name = "commercial",
     hdrs = glob(
         include = CGAL_LGPL_PACKAGES + CGAL_GPL_PACKAGES,
-        exclude = CGAL_EXCLUDE_FILES,
         allow_empty = True,
+        exclude = CGAL_EXCLUDE_FILES,
     ),
     defines = [
         "CGAL_HEADER_ONLY",
@@ -229,7 +231,6 @@ cc_library(
         "CGAL_USE_MPFR",
     ],
     includes = [pkg + "/include" for pkg in CGAL_LGPL_PACKAGE_NAMES + CGAL_GPL_PACKAGE_NAMES],
-    visibility = ["//visibility:public"],
     deps = [
         # "@gmp",  # GNU Multiple Precision Arithmetic Library (LGPL)
         # "@mpfr", # Multiple Precision Floating-Point Reliable Library (LGPL)

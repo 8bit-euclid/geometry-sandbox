@@ -1,6 +1,9 @@
 """
 Build file for Eigen library
 """
+
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+
 licenses([
     # Note: Eigen is an MPL2 library that includes GPL v3 and LGPL v2.1+ code.
     #       We've taken special care to not reference any restricted code.
@@ -56,7 +59,6 @@ EIGEN_MPL2_HEADER_FILES = glob(
     ],
 )
 
-load("@rules_cc//cc:cc_library.bzl", "cc_library")
 cc_library(
     name = "eigen",
     hdrs = EIGEN_MPL2_HEADER_FILES,
@@ -68,4 +70,3 @@ cc_library(
     includes = ["."],
     visibility = ["//visibility:public"],
 )
-

@@ -140,7 +140,7 @@
   "moduleExtensions": {
     "//third_party/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "YcCneRdW+1lalKY5kkuMP1pgMvSd61z1qKgfGb78ahc=",
+        "bzlTransitiveDigest": "krBq8unppsWogyMPDye497jZYidAXZq6EzLmhNN+NwY=",
         "usagesDigest": "By3jf7HFkiIdZPsfYTGTxRqxk9qTioij34ZbcLIQLIE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -155,17 +155,6 @@
                 "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz"
               ],
               "integrity": "sha256-hYYIT3H5veVF7n+m0AKIsmSit6w2B7l05U0T5xYsHHI="
-            }
-          },
-          "triangle": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "build_file": "@@//third_party/bazel:triangle.BUILD",
-              "strip_prefix": "triangle-master",
-              "urls": [
-                "https://github.com/libigl/triangle/archive/refs/heads/master.zip"
-              ],
-              "integrity": "sha256-e0iDKs1rZYdea27xnXrf4aLiHUmyL2t3ZsrMmlwbX8M="
             }
           },
           "boost": {
@@ -190,6 +179,14 @@
               "integrity": "sha256-F+6GdQuYsO/vNWtw8b7WtUGzVzvSkR9A/UAzjTVFJvU="
             }
           },
+          "geogram": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
+            "attributes": {
+              "remote": "https://github.com/BrunoLevy/geogram.git",
+              "build_file": "@@//third_party/bazel:geogram.BUILD",
+              "tag": "v1.9.6"
+            }
+          },
           "openvdb": {
             "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
             "attributes": {
@@ -197,15 +194,27 @@
               "build_file": "@@//third_party/bazel:openvdb.BUILD",
               "tag": "v11.0.0"
             }
+          },
+          "triangle": {
+            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
+            "attributes": {
+              "build_file": "@@//third_party/bazel:triangle.BUILD",
+              "strip_prefix": "triangle-master",
+              "urls": [
+                "https://github.com/libigl/triangle/archive/refs/heads/master.zip"
+              ],
+              "integrity": "sha256-e0iDKs1rZYdea27xnXrf4aLiHUmyL2t3ZsrMmlwbX8M="
+            }
           }
         },
         "moduleExtensionMetadata": {
           "explicitRootModuleDirectDeps": [
             "eigen",
-            "triangle",
             "boost",
             "cgal",
-            "openvdb"
+            "geogram",
+            "openvdb",
+            "triangle"
           ],
           "explicitRootModuleDirectDevDeps": [],
           "useAllRepos": "NO",
