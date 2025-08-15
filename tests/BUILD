@@ -33,3 +33,12 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "geogram_tests",
+    srcs = ["geogram_tests.cpp"],
+    deps = [
+        "@geogram//:headers",
+        "@googletest//:gtest_main",
+    ],
+)

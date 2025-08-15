@@ -140,7 +140,7 @@
   "moduleExtensions": {
     "//third_party/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "krBq8unppsWogyMPDye497jZYidAXZq6EzLmhNN+NwY=",
+        "bzlTransitiveDigest": "qKsoJ+SH3reFCkod0Tk3SVORgg07vzEBixA3B1vT720=",
         "usagesDigest": "By3jf7HFkiIdZPsfYTGTxRqxk9qTioij34ZbcLIQLIE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -184,7 +184,7 @@
             "attributes": {
               "remote": "https://github.com/BrunoLevy/geogram.git",
               "build_file": "@@//third_party/bazel:geogram.BUILD",
-              "tag": "v1.9.6"
+              "commit": "fc3eb9bf44d2ee29686592e3ef5f5f4daeda27f8"
             }
           },
           "openvdb": {

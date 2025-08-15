@@ -38,12 +38,12 @@ def _non_module_deps_impl(module_ctx):
         integrity = "sha256-F+6GdQuYsO/vNWtw8b7WtUGzVzvSkR9A/UAzjTVFJvU=",
     )
 
-    # Geogram library v1.9.6
+    # Geogram library v1.9.6 (pinned to commit instead of tag to avoid Bazel DEBUG noise)
     new_git_repository(
         name = "geogram",
         remote = "https://github.com/BrunoLevy/geogram.git",
         build_file = "//third_party/bazel:geogram.BUILD",
-        tag = "v1.9.6",
+        commit = "fc3eb9bf44d2ee29686592e3ef5f5f4daeda27f8",
     )
 
     # OpenVDB library
