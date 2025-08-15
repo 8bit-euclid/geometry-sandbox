@@ -140,7 +140,7 @@
   "moduleExtensions": {
     "//third_party/bazel:extensions.bzl%non_module_deps": {
       "general": {
-        "bzlTransitiveDigest": "D785KrnBcQlJ2l4VijWZWwnqWusMpPJrXlHy3crYw1k=",
+        "bzlTransitiveDigest": "UG3MQMlhI13fegqhZBnfRHUfUH5OhFVUvfFSb9E49mg=",
         "usagesDigest": "By3jf7HFkiIdZPsfYTGTxRqxk9qTioij34ZbcLIQLIE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -166,14 +166,6 @@
                 "https://github.com/libigl/triangle/archive/refs/heads/master.zip"
               ],
               "integrity": "sha256-e0iDKs1rZYdea27xnXrf4aLiHUmyL2t3ZsrMmlwbX8M="
-            }
-          },
-          "libigl": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:git.bzl%git_repository",
-            "attributes": {
-              "build_file": "@@//third_party/bazel:libigl.BUILD",
-              "remote": "https://github.com/libigl/libigl.git",
-              "commit": "40e7900ccbd767f1f360e0eb10f0f1a6432e0993"
             }
           },
           "boost": {
@@ -210,7 +202,6 @@
         "moduleExtensionMetadata": {
           "explicitRootModuleDirectDeps": [
             "eigen",
-            "libigl",
             "triangle",
             "boost",
             "cgal",

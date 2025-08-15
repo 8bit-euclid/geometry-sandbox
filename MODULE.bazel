@@ -24,4 +24,4 @@ git_override(
 
 # For external dependencies that don't have Bazel modules, we need to use module extensions.
 non_module_deps = use_extension("//third_party/bazel:extensions.bzl", "non_module_deps")
-use_repo(non_module_deps, "eigen", "libigl", "triangle", "boost", "cgal", "openvdb")
+use_repo(non_module_deps, "eigen", "triangle", "boost", "cgal", "openvdb")

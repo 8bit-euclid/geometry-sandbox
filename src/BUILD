@@ -5,7 +5,6 @@ cc_binary(
     srcs = ["main.cpp"],
     deps = [
         "@eigen//:eigen",
-        "@libigl//:igl",
         "@triangle//:triangle",
     ],
     linkopts = [],

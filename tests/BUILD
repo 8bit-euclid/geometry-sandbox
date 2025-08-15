@@ -14,17 +14,6 @@ cc_test(
 )
 
 cc_test(
-    name = "libigl_tests",
-    srcs = ["libigl_tests.cpp"],
-    size = "small",
-    deps = [
-        "@eigen//:eigen",  # libigl headers depend on Eigen
-        "@libigl//:igl",
-        "@googletest//:gtest_main",
-    ],
-)
-
-cc_test(
     name = "triangle_tests",
     srcs = ["triangle_tests.cpp"],
     size = "small",
@@ -39,7 +28,7 @@ cc_test(
     srcs = ["cgal_tests.cpp"],
     size = "small",
     deps = [
-        "@cgal//:cgal",
+        "@cgal//:free",
         "@boost//:boost_headers",
         "@googletest//:gtest_main",
     ],
