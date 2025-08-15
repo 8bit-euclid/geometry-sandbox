@@ -28,13 +28,13 @@ def _non_module_deps_impl(module_ctx):
         integrity = "sha256-e0iDKs1rZYdea27xnXrf4aLiHUmyL2t3ZsrMmlwbX8M=",
     )
 
-    # Boost 1.86.0
+    # Boost 1.89.0
     http_archive(
         name = "boost",
         build_file = "//third_party/bazel:boost.BUILD",
-        strip_prefix = "boost_1_86_0",
-        urls = ["https://archives.boost.io/release/1.86.0/source/boost_1_86_0.tar.gz"],
-        integrity = "sha256-JXXnT/w+8c0Lq6wsHui9tXgqDuZysZEtpA5bS1kcoB8=",
+        strip_prefix = "boost_1_89_0",
+        urls = ["https://archives.boost.io/release/1.89.0/source/boost_1_89_0.tar.gz"],
+        integrity = "sha256-nedY23VegzCgHZlbCiTQl5gEhACsJcA/xeqb42SxPJM=",
     )
 
     # CGAL 6.0.1 (header-only parts primarily; CGAL has optional 3rd party deps)
